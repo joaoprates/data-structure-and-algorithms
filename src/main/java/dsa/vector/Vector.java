@@ -2,15 +2,15 @@ package dsa.vector;
 
 public class Vector {
 
-	private String[] elements; 
+	private Object[] elements; 
 	private int length;
 
 	public Vector(int capacity){
-		this.elements = new String[capacity];
+		this.elements = new Object[capacity];
 		this.length = 0;
 	}
 	
-	public boolean add(String element) {
+	public boolean add(Object element) {
 		this.increaseCapacity();
 		if (this.length < this.elements.length){
 			this.elements[this.length] = element;
@@ -20,7 +20,7 @@ public class Vector {
 		return false;
 	}
 
-	public boolean add(int position, String element){
+	public boolean add(int position, Object element){
 		
 		if (!(position >= 0 && position < length)){
 			throw new IllegalArgumentException("Invalid position");
@@ -40,22 +40,20 @@ public class Vector {
 	
 	private void increaseCapacity(){
 		if (this.length == this.elements.length){
-			String[] newElements = new String[this.elements.length * 2];
-			for (int i=0; i<this.elements.length; i++){
-				newElements[i] = this.elements[i];
-			}
+			Object[] newElements = new Object[this.elements.length * 2];
+            System.arraycopy(this.elements, 0, newElements, 0, this.elements.length);
 			this.elements = newElements;
 		}
 	}
 	
-	public String search(int position){
+	public Object search(int position){
 		if (!(position >= 0 && position < length)){
 			throw new IllegalArgumentException("Invalid position");
 		} 
 		return this.elements[position];
 	}
 	
-	public int search(String element){
+	public int search(Object element){
 		for (int i=0; i<this.length; i++){
 			if (this.elements[i].equals(element)){
 				return i;
@@ -64,14 +62,14 @@ public class Vector {
 		return -1;
 	}
 
-	public void remove(int position){
-		if (!(position >= 0 && position < length)){
-			throw new IllegalArgumentException("Invalid position");
+	public void remove(Object element){
+		int position = search(element); // Find the position of the element
+		if (position != -1) {
+			for (int i = position; i < this.length - 1; i++) {
+				this.elements[i] = this.elements[i + 1];
+			}
+			this.length--;
 		}
-		for (int i=position; i<this.length-1; i++){
-			this.elements[i] = this.elements[i+1];
-		}
-		this.length--;
 	}
 	
 	public int length(){
