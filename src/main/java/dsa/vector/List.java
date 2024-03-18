@@ -52,15 +52,18 @@ public class List<T> {
             this.elements = newElements;
         }
     }
+    public T get(int position){
+        return this.search(position);
+    }
 
-    public Object search(int position){
+    public T search(int position){
         if (!(position >= 0 && position < length)){
             throw new IllegalArgumentException("Invalid position");
         }
         return this.elements[position];
     }
 
-    public int search(Object element){
+    public int search(T element){
         for (int i=0; i<this.length; i++){
             if (this.elements[i].equals(element)){
                 return i;
@@ -69,13 +72,30 @@ public class List<T> {
         return -1;
     }
 
-    public void remove(T element){
-        int position = search(element); // Find the position of the element
-        if (position != -1) {
-            for (int i = position; i < this.length - 1; i++) {
-                this.elements[i] = this.elements[i + 1];
+    public int lastIndex(T element){
+
+        for (int i=this.length-1; i>=0; i--){
+            if (this.elements[i].equals(element)){
+                return i;
             }
-            this.length--;
+        }
+        return -1;
+    }
+
+    public void remove(int position){
+        if (!(position >= 0 && position < length)){
+            throw new IllegalArgumentException("Invalid position");
+        }
+        for (int i=position; i<this.length-1; i++){
+            this.elements[i] = this.elements[i+1];
+        }
+        this.length--;
+    }
+
+    public void remove(T element){
+        int pos = this.search(element);
+        if (pos > -1){
+            this.remove(pos);
         }
     }
 
@@ -102,5 +122,32 @@ public class List<T> {
 
         return s.toString();
     }
+
+    public void clear(){
+        //option 1
+        this.elements = (T[]) new Object[this.elements.length];
+
+        //option 2
+       // this.length = 0;
+
+        //option 3
+      //  for (int i=0; i<this.length; i++){
+       //     this.length[i] = null;
+       // }
+        //this.length = 0;
+    }
+
+    public boolean contains(T element){
+
+		/*int pos = search(element);
+		if (pos > -1){
+			return true;
+		}
+
+		return false;*/
+
+        return search(element) > -1; //>=0
+    }
+
 
 }

@@ -7,11 +7,11 @@ public class Class10 {
 
         Vector vector = new Vector(10);
 
-        Contact c1 = new Contact("Joao", "1123", "aa@bbb");
-        Contact c2 = new Contact("Joe", "number", "email here");
-        Contact c3 = new Contact("Jose", "666666", "444bbb");
+        Contact c1 = new Contact();
+        Contact c2 = new Contact();
+        Contact c3 = new Contact();
 
-        Contact c4 = new Contact("Joe", "number", "email here");
+        Contact c4 = new Contact();
 
         vector.add(c1);
         vector.add(c2);

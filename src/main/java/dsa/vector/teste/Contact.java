@@ -1,8 +1,17 @@
 package dsa.vector.teste;
 
-import java.util.Objects;
-
 public class Contact {
+
+    public Contact(String name, String phone, String email) {
+        super();
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Contact() {
+
+    }
 
     private String name;
 
@@ -14,12 +23,12 @@ public class Contact {
         this.name = name;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -30,7 +39,7 @@ public class Contact {
         this.email = email;
     }
 
-    private String telephone;
+    private String phone;
     private String email;
 
     @Override
@@ -59,11 +68,11 @@ public class Contact {
         } else if (!name.equals(other.name)) {
             return false;
         }
-        if (telephone == null) {
-            if (other.telephone != null) {
+        if (phone == null) {
+            if (other.phone != null) {
                 return false;
             }
-        } else if (!telephone.equals(other.telephone)) {
+        } else if (!phone.equals(other.phone)) {
             return false;
         }
         return true;
@@ -76,14 +85,12 @@ public class Contact {
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result
-                + ((telephone == null) ? 0 : telephone.hashCode());
+                + ((phone == null) ? 0 : phone.hashCode());
         return result;
     }
 
-    public Contact(String name, String telephone, String email) {
-        super();
-        this.name = name;
-        this.telephone = telephone;
-        this.email = email;
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Phone: " + phone + ", Email: " + email;
     }
 }
